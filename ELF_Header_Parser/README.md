@@ -9,12 +9,12 @@ The program works by passing the path to the required file to the program and it
 ## Compilation
 In order to run the program, I ran this command : <br>
 ```bash
-gcc -Wall -Werror -Wextra -pedantic task2.c -o task2.exe
+gcc -Wall -Werror -Wextra -pedantic elf_header_parser.c -o elf_header_parser.exe
 ```
 
 ## Outputs
 
-`readelf -h task2.exe :` <br>
+`readelf -h elf_header_parser.exe :` <br>
 ```text
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
@@ -38,7 +38,7 @@ ELF Header:
   Section header string table index: 30
 ```
 
-`./task2.exe task2.exe :` <br>
+`./elf_header_parser.exe elf_header_parser.exe :` <br>
 ```text
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 

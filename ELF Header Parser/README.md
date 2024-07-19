@@ -1,9 +1,10 @@
-<h1 align = "center"> Task2 </h1>
+<h1 align = "center"> ELF Header Parser </h1>
 
 ## Introduction
-This application parses ELF files and prints the ELF header content, similar to the `readelf -h` command. <br>
+This application parses `ELF` files and prints the `ELF` header content, similar to the `readelf -h` command. <br>
 The only missing part is the `OS/ABI:` part as there's a lot of values and including all of them in a switch case
-would take a lot of time and make the code look overwhelming.
+would take a lot of time and make the code look overwhelming. <br>
+The program works by passing the path to the required file to the program and it automatically prints the `ELF` headers it parsed.
 
 ## Compilation
 In order to run the program, I ran this command : <br>

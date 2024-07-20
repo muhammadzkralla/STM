@@ -38,7 +38,7 @@ ELF Header:
   Section header string table index: 30
 ```
 
-`./elf_header_parser.exe elf_header_parser.o :` <br>
+`./elf_header_parser.o elf_header_parser.o :` <br>
 ```text
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 

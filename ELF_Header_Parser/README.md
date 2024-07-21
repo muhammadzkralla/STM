@@ -12,6 +12,8 @@ In order to run the program, I ran this command : <br>
 gcc -Wall -Werror -Wextra -pedantic elf_header_parser.c -o elf_header_parser.o
 ```
 
+These flags are used to include more warnings and treat them as errors as well as forcing ISO C.
+
 ## Outputs
 
 `readelf -h elf_header_parser.o :` <br>

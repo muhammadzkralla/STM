@@ -31,5 +31,19 @@ int main()
 	printf("the value of ptr4: %c\n", *ptr4);
 	printf("the value of ptr5: %d\n", *ptr5);
 
+	zfree(ptr2);
+	zfree(ptr4);
+	zfree(ptr3);
+
+	int *ptr6 = (int*) zmalloc(sizeof(int));
+	printf("the value of ptr6: %d\n", *ptr6);
+
+	*ptr6 = 5;
+	printf("the value of ptr6: %d\n", *ptr6);
+
+	printf("\nThe blocks in heap:\n\n");
+
+	print();
+
 	return 0;
 }

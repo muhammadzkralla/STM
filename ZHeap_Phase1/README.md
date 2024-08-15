@@ -13,7 +13,6 @@ These flags are used to include more warnings and treat them as errors as well a
 ## Outputs
 `./test1.exe :` <br>
 ```text
-
 the system break incremented by 512 bytes
 the heap size now is 512 bytes
 remaining in the heap: 1048064 bytes
@@ -33,7 +32,7 @@ value sotred at 0x4c839a is 7
 value sotred at 0x4c839e is 8
 value sotred at 0x4c83a2 is 9
 value sotred at 0x4c83a6 is 10
-value sotred at 0x4c83c2 is Hello World!
+value sotred at 0x4c83c2 is hello
 Start of the heap: 0x4c8300
 
 The blocks in heap:
@@ -64,12 +63,12 @@ free: 0
 next: 0x4c83aa
 **************
 start: 0x4c83aa
-size: 36 bytes
+size: 30 bytes
 free: 0
-next: 0x4c83ce
+next: 0x4c83c8
 **************
-start: 0x4c83ce
-size: 256 bytes
+start: 0x4c83c8
+size: 312 bytes
 free: 1
 next: (nil)
 **************
@@ -103,12 +102,12 @@ free: 0
 next: 0x4c83aa
 **************
 start: 0x4c83aa
-size: 36 bytes
+size: 30 bytes
 free: 0
-next: 0x4c83ce
+next: 0x4c83c8
 **************
-start: 0x4c83ce
-size: 256 bytes
+start: 0x4c83c8
+size: 312 bytes
 free: 1
 next: (nil)
 **************
@@ -142,7 +141,7 @@ free: 0
 next: 0x4c83aa
 **************
 start: 0x4c83aa
-size: 292 bytes
+size: 342 bytes
 free: 1
 next: (nil)
 **************
@@ -171,7 +170,7 @@ free: 0
 next: 0x4c836a
 **************
 start: 0x4c836a
-size: 356 bytes
+size: 406 bytes
 free: 1
 next: (nil)
 **************
@@ -200,7 +199,7 @@ free: 0
 next: 0x4c836a
 **************
 start: 0x4c836a
-size: 356 bytes
+size: 406 bytes
 free: 1
 next: (nil)
 **************
@@ -225,7 +224,7 @@ free: 0
 next: 0x4c836a
 **************
 start: 0x4c836a
-size: 356 bytes
+size: 406 bytes
 free: 1
 next: (nil)
 **************
@@ -255,7 +254,7 @@ free: 0
 next: 0x4c836a
 **************
 start: 0x4c836a
-size: 356 bytes
+size: 406 bytes
 free: 1
 next: (nil)
 **************
@@ -280,7 +279,7 @@ free: 0
 next: 0x4c8351
 **************
 start: 0x4c8351
-size: 381 bytes
+size: 431 bytes
 free: 1
 next: (nil)
 **************
@@ -294,7 +293,7 @@ free: 0
 next: 0x4c831c
 **************
 start: 0x4c831c
-size: 434 bytes
+size: 484 bytes
 free: 1
 next: (nil)
 **************

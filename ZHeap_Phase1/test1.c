@@ -8,7 +8,7 @@ int main()
 	char *ptr4 = (char*) zmalloc(sizeof(char));
 
 	int *ptr5 = (int*) zmalloc(10 * sizeof(int));
-	char *ptr6 = (char*) zmalloc(12 * sizeof(char));
+	char *ptr6 = (char*) zmalloc(6 * sizeof(char));
 
 	printf("\nStoring some initial data\n");
 	*ptr1 = 123456;
@@ -20,7 +20,12 @@ int main()
 	{
 		ptr5[i] = i + 1;
 	}
-	strcpy(ptr6, "Hello World!");
+	*ptr6 = 'h';
+	*(ptr6 + 1) = 'e';
+	*(ptr6 + 2) = 'l';
+	*(ptr6 + 3) = 'l';
+	*(ptr6 + 4) = 'o';
+	*(ptr6 + 5) = '\0';
 
 	printf("value sotred at %p is %d\n", (void*) ptr1, *ptr1);
 	printf("value sotred at %p is %c\n", (void*) ptr2, *ptr2);

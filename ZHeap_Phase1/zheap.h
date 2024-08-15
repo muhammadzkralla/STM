@@ -6,7 +6,7 @@
 #include <string.h>
 
 #define HEAP_SIZE 1024 * 1024
-#define CHUNK_SIZE 128
+#define PAGE_SIZE 128
 
 typedef struct block {
         size_t size;
@@ -21,6 +21,7 @@ extern char *brk;
 /* zmalloc */
 void *zmalloc(size_t size);
 void split_block(struct block *current, size_t size);
+void increment_brk(size_t size);
 
 /* zfree */
 void zfree(void *ptr);

@@ -40,6 +40,7 @@ int main()
 	
 
 	printf("Start of the heap: %p\n", heap);
+	printf("Program break: %p", (void*) brk);
 
 	printf("\nThe blocks in heap:\n\n");
 	print();
@@ -80,6 +81,9 @@ int main()
 	printf("Allocate memory for int (first fit in the 1st block)\n");
 	ptr1 = (int*) zmalloc(sizeof(int));
 
+	printf("Initializing the value of the first block to 400 to see if it can reserve state after some processes\n");
+	*ptr1 = 400;
+
 	printf("Allocate memory for char (first fit in the 2nd block)\n");
 	ptr2 = (char*) zmalloc(sizeof(char));
 
@@ -100,9 +104,6 @@ int main()
 
 	printf("\nThe blocks in heap:\n\n");
 	print();
-
-	printf("Storing a value in the first block\n");
-	*ptr1 = 400;
 
 	printf("value sotred at %p is %d\n", (void*) ptr1, *ptr1);
 }

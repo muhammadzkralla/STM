@@ -13,18 +13,13 @@ These flags are used to include more warnings and treat them as errors as well a
 ## Outputs
 `./test1.exe :` <br>
 ```text
-program break is: 0x4c9300
-list before creating a new block:
-
-the system break incremented by 128 bytes
+the program break incremented by 128 bytes
 the heap size now is 128 bytes
-remaining in the heap: 1048448 bytes
+heap can be increased more by: 1048448 bytes if needed
 
-from split of 0x4c9351 of size 47:
-
-the system break incremented by 128 bytes
+the program break incremented by 128 bytes
 the heap size now is 256 bytes
-remaining in the heap: 1048320 bytes
+heap can be increased more by: 1048320 bytes if needed
 
 Storing some initial data
 value sotred at 0x4c9318 is 123456
@@ -43,7 +38,7 @@ value sotred at 0x4c93a2 is 9
 value sotred at 0x4c93a6 is 10
 value sotred at 0x4c93c2 is hello
 Start of the heap: 0x4c9300
-
+Program break: 0x4c9400
 The blocks in heap:
 
 start: 0x4c9300
@@ -238,6 +233,7 @@ free: 1
 next: (nil)
 **************
 Allocate memory for int (first fit in the 1st block)
+Initializing the value of the first block to 400 to see if it can reserve state after some processes
 Allocate memory for char (first fit in the 2nd block)
 
 The blocks in heap:
@@ -306,6 +302,5 @@ size: 228 bytes
 free: 1
 next: (nil)
 **************
-Storing a value in the first block
 value sotred at 0x4c9318 is 400
 ```

@@ -9,7 +9,7 @@
  */
 void *zmalloc(size_t size)
 {
-	struct block *current = free_list;
+	struct block *current = free_list, *prev = free_list;
 
 	// first-fit algorithm to find the first block that fits the required size
 	// in the free list of blocks
@@ -31,15 +31,24 @@ void *zmalloc(size_t size)
 			return (char*) current + sizeof(block);
 		}
 
+		prev = current;
 		current = current->next;
 	}
 
+	printf("program break is: %p\n", brk);
+	printf("list before creating a new block:\n");
+	print();
 	size_t total_size = size + sizeof(block);
 
 	// minimize the number of increasing the system break
 	if (total_size < CHUNK_SIZE)
 	{
 		total_size = CHUNK_SIZE;
+	}
+	else
+	{
+		int rem = total_size / CHUNK_SIZE;
+		total_size = rem * CHUNK_SIZE;
 	}
 
 	// there's no enough space to increase the heap break
@@ -63,7 +72,6 @@ void *zmalloc(size_t size)
 	printf("\nthe system break incremented by %ld bytes\n", total_size);
 	printf("the heap size now is %ld bytes\n", heap_size);
 	printf("remaining in the heap: %ld bytes\n", rem);
-
 	
 	// the same splitting strategy
 	if (current->size > size + sizeof(block))
@@ -72,7 +80,11 @@ void *zmalloc(size_t size)
 	}
 
 	// if the malloc is successful, initialize the free list linked list
-	if (free_list == NULL)
+	if (prev != NULL)
+	{
+		prev->next = current;
+	}
+	else
 	{
 		free_list = (block*) heap;
 	}
@@ -94,6 +106,22 @@ void split_block(struct block *current, size_t size)
 	new_block->size = current->size - size - sizeof(block);
 	new_block->free = 1;
 	new_block->next = current->next;
+
+	if (new_block->size < sizeof(block))
+	{
+		brk += CHUNK_SIZE;
+
+		// this is just for info
+		size_t heap_size = brk - heap;
+		size_t rem = heap + HEAP_SIZE - brk;
+
+		printf("\nfrom split of %p of size %ld:\n", (void*) current, current->size);
+		printf("\nthe system break incremented by %d bytes\n", CHUNK_SIZE);
+		printf("the heap size now is %ld bytes\n", heap_size);
+		printf("remaining in the heap: %ld bytes\n", rem);
+		
+		new_block->size = (new_block->size + CHUNK_SIZE);
+	}
 	
 	current->size = size + sizeof(block);
 	current->next = new_block;

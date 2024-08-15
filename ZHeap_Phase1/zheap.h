@@ -6,7 +6,7 @@
 #include <string.h>
 
 #define HEAP_SIZE 1024 * 1024
-#define CHUNK_SIZE 512
+#define CHUNK_SIZE 128
 
 typedef struct block {
         size_t size;

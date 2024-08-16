@@ -3,8 +3,8 @@
 ## Introduction
 <h2 align = "center"> Virtual heap memory manager built with C. </h2>
 
-![ZHeap](https://github.com/user-attachments/assets/74e12380-823e-48e5-96c9-20886805736b)
-![Zmalloc](https://github.com/user-attachments/assets/2e08320e-65e2-493a-9fb0-c08c102b04b9)
+![ZHeap](https://github.com/user-attachments/assets/972d1600-ed94-4a06-843a-336f99e2215b)
+![Zmalloc](https://github.com/user-attachments/assets/ab3a6d29-f033-4288-a10e-5538f7a34396)
 ![Zfree](https://github.com/user-attachments/assets/a15d7341-afd6-4d2f-b661-6fb5cae397bf)
 
 <br><hr>

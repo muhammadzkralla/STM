@@ -24,7 +24,16 @@ void *zmalloc(size_t size)
 			// as free
 			if (current->size > size + sizeof(block))
 			{
-				split_block(current, size);
+				if (can_split(current, size) == 0)
+				{
+					split_block(current, size);
+				}
+				else
+				{
+					prev = current;
+					current = current->next;
+					continue;
+				}
 			}
 
 			current->free = 0;
@@ -44,8 +53,7 @@ void *zmalloc(size_t size)
 	}
 	else
 	{
-		int rem = total_size / PAGE_SIZE;
-		total_size = rem * PAGE_SIZE;
+		total_size += PAGE_SIZE;
 	}
 
 	// there's no enough space to increase the heap break
@@ -123,4 +131,31 @@ void increment_brk(size_t size)
 	printf("\nthe program break incremented by %ld bytes\n", size);
 	printf("the heap size now is %ld bytes\n", heap_size);
 	printf("heap can be increased more by: %ld bytes if needed\n", rem);
+}
+
+/**
+ * can_split - Check if we can split this node or not.
+ *
+ * @current: the block we will split
+ * @size: the size of the first block without metadata
+ *
+ * Return: 0 if yes, -1 if not
+ */
+int can_split(struct block *current, size_t size)
+{
+	if (current->next == NULL)
+	{
+		return 0;
+	}
+
+	size_t block_size = sizeof(block);
+	size_t total_size = size + block_size;
+	size_t current_size = current->size;
+
+	if (current_size - total_size > block_size)
+	{
+		return 0;
+	}
+
+	return -1;
 }

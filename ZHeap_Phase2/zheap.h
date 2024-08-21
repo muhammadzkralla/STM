@@ -31,6 +31,9 @@ void merge_blocks(struct block *first, struct block *second);
 /* zrealloc */
 void *zrealloc(void *ptr, size_t size);
 
+/* zcalloc */
+void *zcalloc(size_t nmemb, size_t size);
+
 /* zheap */
 void print();
 

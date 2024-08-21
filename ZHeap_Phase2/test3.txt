@@ -1,0 +1,21 @@
+#include "zheap.h"
+
+int main()
+{
+	char *ptr1 = (char*) zmalloc(sizeof(char));
+	printf("Successfully allocated the address %p for a char.\n", (void*) ptr1);
+	print();
+
+	*ptr1 = 'c';
+	printf("Successfully stored %c in the address %p\n", *ptr1, (void*) ptr1);
+
+	int *ptr2 = (int*) zrealloc(ptr1, sizeof(int));
+	printf("Successfully allocated the address %p for an int.\n", (void*) ptr2);
+	print();
+
+	*ptr2 = 5;
+	printf("Successfully stored %d in the address %p\n", *ptr2, (void*) ptr2);
+
+	zfree(ptr2);
+	print();
+}

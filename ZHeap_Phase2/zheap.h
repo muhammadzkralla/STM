@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define HEAP_SIZE 32 * 1024 * 1024
 #define PAGE_SIZE 1024 * 1024
@@ -14,14 +15,11 @@ typedef struct block {
 	struct block *next;
 } block;
 
-extern char heap[HEAP_SIZE];
 extern struct block *free_list;
-extern char *brk;
 
 /* zmalloc */
 void *zmalloc(size_t size);
 void split_block(struct block *current, size_t size);
-void increment_brk(size_t size);
 int can_split(struct block *current, size_t size);
 
 /* zfree */

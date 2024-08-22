@@ -46,30 +46,17 @@ void *zmalloc(size_t size)
 
 	size_t total_size = size + sizeof(block);
 
-	// minimize the number of increasing the system break
-	if (total_size < PAGE_SIZE)
-	{
-		total_size = PAGE_SIZE;
-	}
-	else
-	{
-		total_size += PAGE_SIZE;
-	}
-
-	// there's no enough space to increase the heap break
-	if (brk + total_size > heap + HEAP_SIZE)
+	// create the new block and increment the heap break
+	current = (block*) sbrk(total_size);
+	if (current == (void*)-1)
 	{
 		return NULL;
 	}
 
-	// create the new block and increment the heap break
-	current = (block*) brk;
 	current->size = total_size;
 	current->free = 0;
 	current->next = NULL;
 
-	increment_brk(total_size);
-	
 	// the same splitting strategy
 	if (current->size > size + sizeof(block))
 	{
@@ -83,7 +70,7 @@ void *zmalloc(size_t size)
 	}
 	else
 	{
-		free_list = (block*) heap;
+		free_list = current;
 	}
 
 	return (char*) current + sizeof(block);
@@ -106,31 +93,13 @@ void split_block(struct block *current, size_t size)
 
 	if (new_block->size < sizeof(block))
 	{
-		increment_brk(PAGE_SIZE);
-		new_block->size = (new_block->size + PAGE_SIZE);
+		char *ptr1 = (char*) sbrk(PAGE_SIZE), *ptr2 = (char*) sbrk(0);
+		size_t added_size = (ptr2 - ptr1);
+		new_block->size = (new_block->size + (added_size));
 	}
 	
 	current->size = size + sizeof(block);
 	current->next = new_block;
-}
-
-/**
- * increment_brk - Increments the virtual program break.
- *
- * @size: the amount of increase
- *
- * Return: void
- */
-void increment_brk(size_t size)
-{
-	brk += size;
-
-	size_t heap_size = brk - heap;
-	size_t rem = heap + HEAP_SIZE - brk;
-
-	printf("\nthe program break incremented by %ld bytes\n", size);
-	printf("the heap size now is %ld bytes\n", heap_size);
-	printf("heap can be increased more by: %ld bytes if needed\n", rem);
 }
 
 /**

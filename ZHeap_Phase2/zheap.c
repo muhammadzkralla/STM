@@ -1,8 +1,6 @@
 #include "zheap.h"
 
-char heap[HEAP_SIZE];
 struct block *free_list = NULL;
-char *brk = heap;
 
 /**
  * print - Prints the current free list

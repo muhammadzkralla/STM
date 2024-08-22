@@ -13,7 +13,6 @@ void *zrealloc(void *ptr, size_t size)
 {
 	if (ptr == NULL && size == 0)
 	{
-		printf("Are you joking?\n");
 		return NULL;
 	}
 	else if (ptr == NULL)

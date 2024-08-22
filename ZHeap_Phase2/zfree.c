@@ -23,6 +23,7 @@ void zfree(void *ptr)
 		{
 			current->free = 1;
 
+			// check the blocks before and after the current block
 			int before_free = 0, after_free = 0;
 			if (current->next != NULL && current->next->free)
 			{

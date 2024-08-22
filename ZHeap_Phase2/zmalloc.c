@@ -53,11 +53,8 @@ void *zmalloc(size_t size)
 	current->free = 0;
 	current->next = NULL;
 
-	// the same splitting strategy
-	if (current->size > size + sizeof(block))
-	{
-		split_block(current, size);
-	}
+	// split the block as it's more than the desired size
+	split_block(current, size);
 
 	// if the malloc is successful, initialize the free list linked list
 	if (prev != NULL)
@@ -82,6 +79,9 @@ void *zmalloc(size_t size)
  */
 void split_block(struct block *current, size_t size)
 {
+	// allign the size and create a new block just after the 
+	// current block with the remaining size and mark
+	// it as a free block
 	size = ALIGN(size);
 	struct block *new_block = (block*) ((char*) current + size + sizeof(block));
 	new_block->size = current->size - size - sizeof(block);
@@ -106,6 +106,8 @@ int can_split(struct block *current, size_t size)
 	size_t total_size = size + block_size;
 	size_t current_size = current->size;
 
+	// if the current block can afford creating a new
+	// block after taking only the desired size
 	if (current_size - total_size > block_size)
 	{
 		return 0;

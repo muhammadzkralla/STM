@@ -9,6 +9,7 @@
  */
 void *zmalloc(size_t size)
 {
+	size = ALIGN(size);
 	struct block *current = free_list, *prev = free_list;
 
 	// first-fit algorithm to find the first block that fits the required size
@@ -28,12 +29,6 @@ void *zmalloc(size_t size)
 				{
 					split_block(current, size);
 				}
-				else
-				{
-					prev = current;
-					current = current->next;
-					continue;
-				}
 			}
 
 			current->free = 0;
@@ -45,6 +40,7 @@ void *zmalloc(size_t size)
 	}
 
 	size_t total_size = size + sizeof(block);
+	total_size += PAGE_SIZE;
 
 	// create the new block and increment the heap break
 	current = (block*) sbrk(total_size);
@@ -86,17 +82,11 @@ void *zmalloc(size_t size)
  */
 void split_block(struct block *current, size_t size)
 {
+	size = ALIGN(size);
 	struct block *new_block = (block*) ((char*) current + size + sizeof(block));
 	new_block->size = current->size - size - sizeof(block);
 	new_block->free = 1;
 	new_block->next = current->next;
-
-	if (new_block->size < sizeof(block))
-	{
-		char *ptr1 = (char*) sbrk(PAGE_SIZE), *ptr2 = (char*) sbrk(0);
-		size_t added_size = (ptr2 - ptr1);
-		new_block->size = (new_block->size + (added_size));
-	}
 	
 	current->size = size + sizeof(block);
 	current->next = new_block;
@@ -112,11 +102,6 @@ void split_block(struct block *current, size_t size)
  */
 int can_split(struct block *current, size_t size)
 {
-	if (current->next == NULL)
-	{
-		return 0;
-	}
-
 	size_t block_size = sizeof(block);
 	size_t total_size = size + block_size;
 	size_t current_size = current->size;

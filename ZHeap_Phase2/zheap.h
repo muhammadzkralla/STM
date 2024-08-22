@@ -6,8 +6,8 @@
 #include <string.h>
 #include <unistd.h>
 
-#define HEAP_SIZE 32 * 1024 * 1024
-#define PAGE_SIZE 1024 * 1024
+#define ALIGN(size) (((size) + (sizeof(void*) - 1)) & ~(sizeof(void*) - 1))
+#define PAGE_SIZE 136 * 1024
 
 typedef struct block {
         size_t size;

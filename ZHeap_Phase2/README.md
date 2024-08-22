@@ -1,7 +1,9 @@
-<h1 align = "center"> Virtual Heap Memory Manager </h1>
+<h1 align = "center"> Heap Memory Manager </h1>
 
 ## Introduction
-<h2 align = "center"> Virtual heap memory manager built with C. </h2>
+<h2 align = "center"> heap memory manager built with C. </h2>
+
+Heap memory manager dynamic shared library used to run several processes like bash, vim, nano...etc. Libz can run any process that's not multi threaded as it does not handle race conditions.
 
 ![ZHeap](https://github.com/user-attachments/assets/972d1600-ed94-4a06-843a-336f99e2215b)
 ![Zmalloc](https://github.com/user-attachments/assets/ab3a6d29-f033-4288-a10e-5538f7a34396)

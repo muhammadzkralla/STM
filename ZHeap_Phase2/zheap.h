@@ -5,14 +5,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <pthread.h>
+#include <sys/mman.h>
 
 #define ALIGN(size) (((size) + (sizeof(void*) - 1)) & ~(sizeof(void*) - 1))
-#define PAGE_SIZE 136 * 1024
+#define PAGE_SIZE sysconf(_SC_PAGESIZE)
+#define MIN_BLOCK_SIZE (sizeof(block) + 8)
+#define MMAP_THRESHOLD (128 * 1024)
 
 typedef struct block {
-        size_t size;
-	int free;
-	struct block *next;
+    size_t size;
+    int free;
+    struct block *next;
 } block;
 
 extern struct block *free_list;
